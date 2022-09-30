@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>数据渲染</title>
+    </head>
+    <body>
+        <!-- 渲染标题 -->
+        <h2 id="title"></h2>
+        <!-- 渲染发表时间 -->
+        <p id="ctime"></p>
+        <!-- 渲染内容 -->
+        <div id="detail"></div>
+        <!-- 
+        <ul id="list">
+            <li></li>
+        </ul>
+ -->
+
+        <!-- 新闻列表 -->
+
+        <ul id="news_list">
+            <li>
+                <a href="#">独家对话马化腾</a>
+                <span>2002-6-7</span>
+            </li>
+        </ul>
+        <script>
+            /*  // 假设已经从接口获取到了一篇文章的数据、
+            var str = ''
+            var obj = {
+                title: '让操作更简单',
+                ctime: '2022-2-2',
+                detail: '经过几年发展，智能电视已经被越来越多的消费者熟悉'
+            }
+            // 练习：将获取的数据渲染到指定位置
+            // 把获取标题的值渲染到id为title的标签之间
+            title.innerHTML = obj.title
+            ctime.innerHTML = obj.ctime
+            detail.innerHTML = obj.detail
+            */
+
+            /*     // 练习:创建一个数组,包含一组姓名,姓名这组姓名渲染到ul列表
+            var arr = ['黑子', '小明', '小亮', '小楠']
+            // 遍历数组
+            // 声明一个变量用于拼接每一个姓名，初始值为空字符串
+            for (var i = 0, str = ''; i < arr.length; i++) {
+                // 把每个姓名放入到li之间
+
+                console.log(`<li>${arr[i]}</li>`);
+                // 渲染
+                // list.innerHTML=`<li>${arr[i]}</li>`
+                // 把每一个拼接起来
+                str += `<li>${arr[i]}</li>`
+
+            }
+            // 整体渲染
+            list.innerHTML = str */
+
+            // 练习
+            var news = [
+                {
+                    title: '独家对话马化腾',
+                    ctime: '2021-4-4',
+                },
+                {
+                    title: '独家对话小黑子',
+                    ctime: '2021-5-5',
+                },
+                {
+                    title: '独家对话亮亮',
+                    ctime: '2021-6-6',
+                },
+            ]
+            for (var i = 0, str = ''; i < news.length; i++) {
+                // console.log(news[i].title, news[i].ctime);
+
+                /* console.log(`
+                    <li>
+                    <a href="#">${news[i].title}</a>
+                    <span>${news[i].ctime}</span>
+                    </li>`
+                    ); */
+
+                str += `<li>
+                            <a href="#">${news[i].title}</a>
+                            <span>${news[i].ctime}</span>
+                            </li>`
+            }
+
+            // 练习：将这组数据渲染到ul之间
+            news_list.innerHTML = str
+        </script>
+    </body>
+</html>

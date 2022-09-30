@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JSON</title>
+    </head>
+    <body>
+        <script >
+            var person ={
+                name:'新哥',
+                sex:'男',
+                salary:50000
+            }
+            console.log(person);
+            // 转为JSON
+            // JSON :将数据以对象形式表现
+            var str = JSON.stringify(person)
+            // console.log(str,typeof str);
+            
+            // 将JSON转为JS对象
+            console.log(JSON.parse(str));
+            
+            
+            
+            
+            
+            // 练习：创建一个数组，包含多个城市名称，将数组转为JSON
+            var  arr=['广州','天津','上海']
+            var str2=JSON.stringify(arr)
+            console.log(str2);
+            // 将JSON数组转为JS数组
+            console.log(JSON.parse(str2));
+        </script>
+    </body>
+</html>

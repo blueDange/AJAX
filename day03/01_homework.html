@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>将对象转为查询字符串</title>
+    </head>
+    <body>
+        <script>
+            /*  var obj = {
+                a: 1,
+                b: 2,
+                c: 3
+            }
+            // a=1&b=2&c=3
+            // 声明变量是一个空数组，用于保存每一组字符串
+            var arr = []
+            // 遍历对象，访问每一个属性
+            for (var k in obj) {
+                // k 属性名 obj[k] 属性值
+                // console.log(k+'='+obj[k]);
+                // 把拼接的每一组字符串放入到数组
+                arr.push(k + '=' + obj[k])
+
+            }
+            // 将数组转为字符串，元素之间用&分隔
+
+            console.log(arr.join('&'));
+ */
+
+
+
+            /*  // 创建函数getSum,传递任意数字，计算1~n之间所有整数的和，通过回调函数获取结果
+              function getSum(n,cb) {
+                  // 计算1~n之间所有整数的和
+                  for (var i = 1, sum = 0; i <= n; i++) {
+                      // 把每个整数加到sum
+                      sum += i
+                  }
+                  // cb=function(){}
+                  // 调用传递这个函数
+                  cb(sum)
+              }
+              getSum(100,function(n){
+                  // n用来接收getSum函数内传递出来的值
+                  console.log('回调函数被调用',n);
+              } ); */
+
+
+            // 练习：创建函数，传递任意两个年份，获取两者之间的闰年个数，最后通过回调函数获取结果
+             function getCount(a, b,cb) {
+                // 循环产生a~b之间所有的年份
+                for(var i=a ,count=0;i<=b;i++){
+                    // 判断i是否为闰年
+                    if (i % 4 === 0 && i % 100 !== 0 || i % 400 === 0) {
+                        count++
+                    
+                    }
+                }
+               // 将count给外部
+               // cb接收到了传递的函数
+               // cb()调用传递的函数
+               cb(count)
+            }
+            getCount(2000,2100,function(r){
+                console.log('调用成功',r);
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>表格</title>
+        <style>
+            table,
+            tr,
+            th,
+            td {
+                border: 1px solid pink;
+                border-collapse: collapse;
+                text-align: center;
+            }
+
+            td,
+            th {
+                width: 200px;
+            }
+
+            thead {
+                background-color: rgb(206, 202, 202);
+            }
+        </style>
+    </head>
+
+    <body>
+        当前的页码<input type="text" name="" id="pno" /> 每页数据量<input
+            type="text"
+            name=""
+            id="count"
+        />
+        <input type="submit" value="提交" id="btn" />
+        <hr />
+        <table>
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>姓名</th>
+                </tr>
+            </thead>
+            <tbody id="list">
+                <tr>
+                    <td>2</td>
+                    <td>tom</td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            btn.onclick = function () {
+                // 获取输入的值
+                var p = pno.value
+                var c = count.value
+                console.log(p, c)
+                // 创建http请求对象
+                var xhr = new XMLHttpRequest()
+                // 打开服务器连接,请求接口
+                xhr.open(
+                    'GET',
+                    `http://127.0.0.1:3000/v1/emps/list?pno=${p}&count=${c}`,
+                    true
+                )
+                // 发送请求
+                xhr.send()
+                // 添加事件
+                xhr.onload = function () {
+                    // 获取响应主题
+                    var result = xhr.responseText
+                    console.log(result)
+                    var obj = JSON.parse(result)
+                    console.log(obj)
+                    var emp = obj.data
+                    for (var i = 1, str = ''; i < emp.length; i++) {
+                        console.log(emp[i].eid)
+                        str += `<tr>
+                <td>${emp[i].eid}
+                    </td>
+                <td>${emp[i].ename}</td>
+            </tr>`
+                    }
+                    // 将拼接的字符串渲染到tbody之间
+                    list.innerHTML = str
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>请求JOSN文件</title>
+    </head>
+    <body>
+        <button id="btn">按钮</button>
+
+        <script src="ajax.js"></script>
+
+        <script>
+            btn.onclick = function () {
+                // 请求JSON文件 ,只能是get方法
+                request({
+                    type: 'GET',
+                    url: 'http://127.0.0.1:3000/emp.json',
+                    data: {},
+                    async: true,
+                    success: function (res) {
+                        console.log(res)
+                    },
+                })
+            }
+        </script>
+    </body>
+</html>

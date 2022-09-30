@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>用户注册</title>
+    </head>
+    <body>
+        用户: <input type="text" id="user" /><span id="cont1"></span> <br />
+        密码: <input type="password" id="pwd1" /><span id="cont2"></span> <br />
+        再次: <input type="password" id="pwd2" /><span id="cont3"></span> <br />
+        手机: <input type="text" id="phone" /><span id="cont4"></span> <br />
+        邮箱: <input type="email" id="email" /><span id="cont5"></span> <br />
+        <button id="btn">提交</button>
+        <script>
+            // 用户名验证
+            user.onfocus = () => {
+                cont1.innerHTML = '用户名长度6-9位之间'
+            }
+            // 失去光标
+            user.onblur = () => {
+                // 去掉空格验证
+                var str = user.value.trim()
+                user.value = str
+                // 是否在6-9
+                if (str.length >= 6 && str.length <= 9) {
+                    cont1.innerHTML = '格式正确'
+                    cont1.style.color = 'blue'
+                } else {
+                    cont1.innerHTML = '格式错误'
+                }
+            }
+            // 密码验证
+            pwd1.onfocus = () => {
+                cont2.innerHTML = '密码长度在6-12位之间'
+            }
+            pwd1.onblur = () => {
+                // 判断是否为空
+                var str = pwd1.value
+                if (str.length === 0) {
+                    cont2.innerHTML = '密码不能为空'
+                } else if (str.length >= 6 && str.length <= 12) {
+                    cont2.innerHTML = '妮儿的牌打得也忒好了'
+                } else {
+                    cont2.innerHTML = '错了,给阿姨倒一杯卡布奇诺'
+                }
+            }
+            // 验证两次密码是否相同
+            pwd2.onblur = () => {
+                var str1 = pwd1.value
+                var str2 = pwd2.value
+                if (str1 !== str2) {
+                    cont3.innerHTML = '两次密码不一样 哥们'
+                } else {
+                    cont3.innerHTML = ''
+                }
+            }
+            // 手机格式
+            phone.onblur = () => {
+                if (/^1[3-9]\d{9}$/.test(phone.value)) {
+                    cont4.innerHTML = '格式对太太'
+                } else {
+                    cont4.innerHTML = '哥们 格式错了 兄弟'
+                }
+            }
+            // 邮箱验证
+            email.onblur = () => {
+                if (
+                    /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(
+                        email.value
+                    )
+                ) {
+                    cont5.innerHTML = '对太太'
+                } else {
+                    cont5.innerHTML = '错咧'
+                }
+            }
+        </script>
+    </body>
+</html>

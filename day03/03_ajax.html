@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>测试封装的Ajax</title>
+    </head>
+    <body>
+        <input type="text" id="num">
+        <button id="btn">删除</button>
+        
+        
+        <!-- 引入封装的ajax -->
+        <script src="ajax.js"></script>
+        
+        <script>
+            // 给按钮绑定点击事件
+            btn.onclick=function(){
+                var id= num.value
+                console.log(id);
+                // 发送请求
+                request({
+                    type:'DELETE',
+                    url:'http://127.0.0.1:3000/v1/emps/'+id,
+                    data:{
+                        
+                    },
+                    async:true,
+                    success:function(res){
+                        console.log(res);
+                    }
+                })
+                
+            }
+        </script>
+    </body>
+</html>

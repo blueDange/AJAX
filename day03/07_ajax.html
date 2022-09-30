@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>请求JSON文件</title>
+        <style>
+            table,
+            tr,
+            td,
+            th {
+                border: 1px solid pink;
+                border-collapse: collapse;
+                width: 800px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="btn">anniu</button>
+        <script src="ajax.js"></script>
+        <table>
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>部门名称</th>
+                </tr>
+            </thead>
+            <tbody id="cont">
+                <tr>
+                    <td>10</td>
+                    <td>研发部</td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            btn.onclick = function () {
+                request({
+                    type: 'GET',
+                    url: 'http://127.0.0.1:3000/dept.json',
+                    data: {},
+                    success: function (res) {
+                        console.log(res)
+                        // 结果是数组,遍历数组,获取每个数据
+                        for (var i = 0, str = ''; i < res.length; i++) {
+                            console.log(res[i])
+                            str += `
+                                    <tr>
+                                    <td>${res[i].did}</td>
+                                    <td>${res[i].dname}</td>
+                                    </tr>
+                            `
+                        }
+                        cont.innerHTML = str
+                    },
+                })
+            }
+        </script>
+    </body>
+</html>

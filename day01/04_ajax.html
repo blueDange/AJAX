@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AJAX</title>
+</head>
+<body>
+    <button id="btn">获取数据</button>
+    <p id="cont"></p>
+</body>
+<script>
+    // 给按钮绑定点击事件
+    btn.onclick = function () {
+        // alert('点击了')
+        // 1.创建HTTP的请求对象
+        var xhr = new XMLHttpRequest()
+        // 2.打开服务器的连接，写要请求的借口
+        // 参数1：接口的请求方法，使用大写
+        // 参数2：接口地址 http://127.0.0.1:3000/index
+        // 参数3：是否为异步请求 ，true->是  false->不是  ，默认是异步true
+        xhr.open('GET', 'http://127.0.0.1:3000/index', true)
+        // 3.添加时间 ，一旦服务器端有响应，会自动触发函数
+        xhr.onload = function () {
+            // 获取响应
+            console.log(xhr.responseText);
+            // 将响应的内容渲染到cont之间
+            cont.innerHTML = xhr.responseText
+        }
+        // 4.项服务器端发送请求
+        xhr.send()
+    }
+</script>
+</html>

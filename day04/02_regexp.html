@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>匹配并替换</title>
+        <style>
+            textarea {
+                font-size: 18px;
+            }
+        </style>
+    </head>
+    <body>
+        <textarea name="" id="text" cols="30" rows="10"></textarea>
+        <br />
+        <button>发表评论</button>
+        <br />
+        <p id="cont2"></p>
+        <script>
+            var btn = document.querySelector('button')
+            var text = document.querySelector('#text')
+            var cont2 = document.querySelector('#cont2')
+            btn.addEventListener('click', function () {
+                var str = text.value
+                // 查找并替换
+                // 参数1是也要查找的字符/也可以是正则表达式; 参数二是要替换的字符
+                var str2 = str.replace(/我草|卧槽|wocao/gi, '**') // i 忽略大小写,g查找全局
+                console.log(str2)
+                cont2.innerHTML = str2
+                // 清空文本域
+                text.value = ''
+                // 去除空格 trim()
+            })
+        </script>
+    </body>
+</html>

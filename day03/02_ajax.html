@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>封装AJAX</title>
+    </head>
+    <body>
+        <button id="btn">发POST请求</button>
+        <br>
+        编号<input type="text" id="num">
+        <button id="btn2">发GET请求</button>
+
+        <script>
+            // 创建函数，封装发送请求的过程
+            function request(options) {
+                // options 接收传递的参数,(格式为对象)
+                console.log(options.data);
+                // 将对象转为查询字符串
+                var arr = [] //用于保存每一组 
+                for (var k in options.data) {
+                    // console.log(k+'='+options.data[k]);
+                    // 将拼接放到数组
+                    arr.push(k + '=' + options.data[k])
+                }
+                // 将数组转为字符串
+                var params = arr.join('&') //拼接的参数
+                // console.log(params);
+                // 创建HTTP请求对象
+                var xhr = new XMLHttpRequest
+
+                // 将请求内型转为大写
+                options.type = options.type.toUpperCase()
+
+
+                // 判断是哪一种请求,GET和DELETE请求相同，PUT和POST请求相同
+                var method = options.type
+                if (method === 'GET' || method === 'DELETE') {
+                    //打开服务器的连接，请求接口
+                    // 将一组参数拼接到URL后边
+                    xhr.open(method, options.url + '?' + params, options.async)
+                    // 发送请求
+                    xhr.send()
+                } else if (method === 'POST' || method === 'PUT') {
+                    xhr.open(method, options.url, options.async)
+                    // 还需要设置请求的内容内型
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                    // 发送请求,将参数添加到请求主体
+                    xhr.send(params)
+
+                }
+                // 添加事件，监听响应
+                xhr.onload = function() {
+                    // 将响应的主体传到外部
+                    // 使用回调函数
+                    options.success(xhr.responseText)
+                }
+
+
+            }
+            // 点击按钮
+            btn.onclick = function() {
+                // 发送请求
+                // 需要:请求方法 接口地址 传参 是否为异步 获取结果
+                request({
+                    type: 'POST',
+                    url: 'http://127.0.0.1:3000/v1/emps',
+                    async: 'ture',
+                    data: {
+                        ename: '新888',
+                        sex: 1,
+                        birthday: '1980-8-8',
+                        salary: 50000,
+                        deptid: 40
+                    },
+                    success: function(res) {
+                        // 将结果放入到res
+                        console.log(res);
+                    }
+                })
+            }
+            
+            
+            
+            
+            // 给btn2绑定点击
+            btn2.onclick=function(){
+                // 发请求
+                request({
+                    type:'GET',     // 请求方法
+                    url:'http://127.0.0.1:3000/v1/emps',
+                    data:{  //  传递用户输入的值
+                        eid:num.value
+                    },
+                    async:true,  // 是否为异步
+                    success:function(res){
+                        console.log(res);
+                    }
+                })
+            }
+        </script>
+    </body>
+</html>

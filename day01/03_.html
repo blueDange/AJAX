@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>异步执行</title>
+        <style>
+            div {
+                width: 400px;
+                height: 100px;
+                background-color: pink;
+                margin: 100px auto;
+                font-size: 36px;
+                text-align: center;
+                line-height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="timer"">2022-9-19</div>
+        <script>
+            function fn(){
+                var d =new Date()
+                var year=d.getFullYear()
+                var month=d.getMonth()+1
+                var date=d.getDate()
+                var hour=d.getHours()
+                var minute=d.getMinutes()
+                var second=d.getSeconds()
+                // 把时间拼接渲染到div之间
+                timer.innerHTML=`${year}-${month}-${date} ${hour}:${minute<10 ? '0'+minute : minute}:${second <10 ? '0'+second : second}`
+            }
+            fn()
+            // 每隔1秒钟，调用函数fn，就会重新渲染时间
+            // 异步操作，不会阻止主程序，回调函数在最后的事件队列
+            // setInterval(fn,1000)
+        </script>
+        <script>
+            console.log(null == undefined);
+            var arr = arr[[3]]
+            console.log(arr);
+        </script>
+    </body>
+</html>

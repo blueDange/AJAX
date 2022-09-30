@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+
+  <body>
+    <input type="text" id="num" />
+    <button id="btn">删除</button> <br />
+    <br />
+    <br />
+
+    <script>
+      // 给按钮绑定点击事件
+      btn.onclick = function () {
+        // 获取用户输入的编号
+        var id = num.value;
+        console.log(id);
+        // 创建HTTP请求对象
+        var xhr = new XMLHttpRequest();
+        // 打开服务器连接，请求接口，将用户输入的拼接拼接到接口地址
+        xhr.open('DELETE', 'http://127.0.0.1:3000/v1/emps/' + id, true);
+        // 发送请求
+        xhr.send();
+        // 添加事件，监听响应
+        xhr.onload = function () {
+          // 响应主体（JSON）
+          var result = xhr.responseText;
+          console.log(result);
+
+          // 将JSON转为JS
+          var obj = JSON.parse(result);
+          console.log(obj);
+          // 操作JS对象，可以执行 渲染、判断...
+          // 判断响应的状态
+          if (obj.code === 200) {
+            alert('删除成功');
+          } else {
+            alert('删除失败');
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

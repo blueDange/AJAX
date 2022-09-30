@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>AJAX请求</title>
+    </head>
+    <body>
+        <button id="btn">按钮</button>
+        <p id="cont"></p>
+        
+        <script>
+            btn.onclick=function(){
+                // 创建HTTP请求对象
+                var xhr =new  XMLHttpRequest()
+                // 请求接口
+                xhr.open('get','http://127.0.0.1:3000/num',true)
+                // 绑定事件，监听是否有响应
+                xhr.onload=function(){
+                    // 获取响应主体
+                    var result=xhr.responseText
+                    console.log(result);
+                    // 直接往后拼接
+                    result += ` , 在0.5以${result>0.5 ? '上' : '下'} `
+                    // 渲染到id为cont的标签之间
+                      cont.innerHTML=result
+                }
+              
+                // 发送请求
+                xhr.send()
+            }
+        </script>
+    </body>
+</html>

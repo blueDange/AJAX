@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        姓名<input type="text" id="ename"> <br><br>
+        性别<input type="text" id="sex"> <br><br>
+        生日<input type="text" id="birthday"> <br><br>
+        工资<input type="text" id="salary"> <br><br>
+        部门<select name="" id="deptid"> <br><br>
+            <option value="10">研发部</option>
+                    <option value="20">运营部</option>
+                    <option value="30">市场部</option>
+                    <option value="40">测试部</option>
+        </select>
+        <button id="cc">提交</button>
+
+        <script src="ajax.js"></script>
+
+
+        <script>
+            cc.onclick = function() {
+
+
+                request({
+                    type: 'POST',
+                    url: 'http://127.0.0.1:3000/v1/emps',
+
+                    data: {
+                        ename: ename.value,
+                        sex: sex.value,
+                        birthday: birthday.value,
+                        salary: salary.value,
+                        deptid: deptid.value
+                    },
+                    async: true,
+                    success: function(res) {
+                        console.log(res);
+                    }
+                })
+            }
+        </script>
+
+    </body>
+</html>

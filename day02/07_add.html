@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POST请求</title>
+  </head>
+
+  <body>
+    姓名 <input type="text" name="ename" id="ename" /> <br />
+
+    性别 <input type=" text" name="" id="sex" /><br />
+    生日 <input type="text" name="" id="birthday" /><br />
+    工资 <input type="text" name="" id="salary" /><br />
+    部门
+    <select name="" id="deptid">
+      <option value="10">研发部</option>
+      <option value="20">运营部</option>
+      <option value="30">市场部</option>
+      <option value="40">测试部</option>
+    </select>
+    <br />
+    <input type="submit" value="提交" id="btn" />
+    <script>
+      btn.onclick = function () {
+        var n1 = ename.value;
+        var n2 = sex.value;
+        var n3 = birthday.value;
+        var n4 = salary.value;
+        var n5 = deptid.value;
+        console.log(n1, n2, n3, n4, n5);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://127.0.0.1:3000/v1/emps', true);
+        //  POST请求需要设置骑牛的内容内行
+        xhr.setRequestHeader(
+          'Content-Type',
+          'application/x-www-form-urlencoded'
+        );
+        // 发送POST 请求,将参数放到请求的主体
+        // a=1&b=2
+
+        xhr.send(
+          `ename=${n1}&sex=${n2}&birthday=${n3}&salary=${n4}&deptid=${n5} `
+        );
+        // 添加事件,监听响应
+        xhr.onload = function () {
+          var result = xhr.responseText;
+          console.log(result);
+          var obj = JSON.parse(result);
+          console.log(obj);
+          if (obj.code === 200) {
+            alert('成功');
+          } else {
+            alert('失败');
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

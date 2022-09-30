@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>GET请求</title>
+</head>
+
+<body>
+  <input type="text" id="num" placeholder="请输入编号">
+  <button id="btn">查询</button>
+  <div id="cont">
+
+  </div>
+  <script>
+
+    // 练习：请求查找员工的接口
+    // 接口地址：http://127.0.0.1:3000/v1/emps
+    // 请求方法：get
+    btn.onclick = function () {
+
+      // 获取文本框的值
+      var id = num.value
+      console.log(id);
+      // 创建HTTP请求对象
+      var xhr = new XMLHttpRequest();
+      // 请求接口,传递编号
+      xhr.open('GET', 'http://127.0.0.1:3000/v1/emps?eid=' + id, true);
+      // 发送请求
+      xhr.send()
+      // 添加事件，监听响应
+      xhr.onload = function () {
+        // 获取响应的主体
+        var result = xhr.responseText
+        console.log(result);
+        // 把JSON转为JS
+        var obj = JSON.parse(result)
+        console.log(obj);
+        if (obj.code === 200) {
+          // 查找到了
+          // 获取员工数据
+          var emp = obj.data[0]
+          cont.innerHTML = `
+                     <p>姓名:${emp.ename}</p>
+                    `
+        } else {
+          alert('该员工存在')
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
